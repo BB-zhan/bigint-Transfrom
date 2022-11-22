@@ -11,10 +11,10 @@ const bigintTransform = {
         return sum
     },
     // 计算结果
-    plusArrFun: (a, b) => {
+    plusArrFun: function(a, b) {
         return a.map((item, i) => {
             if (b[i]) {
-                return i === 0 ? +item + +b[i] + '' : addZero(item, b[i])
+                return i === a.length - 1 ? +item + +b[i] + '' : this.addZero(item, b[i])
             } else {
                 return item
             }
@@ -78,8 +78,11 @@ const bigintTransform = {
     // 增
     plus: function (arrA, arrB) {
         if (arrA === 'Error' || arrB === 'Error') return
+        arrA = arrA.reverse()
+        arrB = arrB.reverse()
         // 开始求和
         let sumArr = arrA.length >= arrB.length ? this.plusArrFun(arrA, arrB) : this.plusArrFun(arrB, arrA)
+        sumArr = sumArr.reverse()
         // 数据进位操作
         sumArr.forEach((item, i) => {
             if (i === 0) return
