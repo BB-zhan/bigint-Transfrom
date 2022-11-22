@@ -40,6 +40,7 @@ bigintTransform.plus(bigintTransform.pack(str), bigintTransform.pack(str))
 v 1.0.3 版本之前只更新说明文档
 v 1.0.4 更新plus函数，计算两个当前的bigint类型数据相加
 v 1.0.4 - 1.0.6 更新说明文档
+v 1.0.7 紧急修复plus功能
 ```
 > GitHub地址: https://github.com/BB-zhan/bigint-Transfrom
 
