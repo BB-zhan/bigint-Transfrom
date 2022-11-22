@@ -12,12 +12,19 @@ import bigintTransform from 'bigint-transform'
 
 ### 使用
 ```ts
-let str: string 
-bigintTransform.pack(str) // 长整数类型字符串转化为每组长度小于等于15位字符串的数组
+let str: string
+let num: number
+bigintTransform.pack(str)
+bigintTransform.pack(num) // 长整数类型字符串转化为每组长度小于等于15位字符串的数组
+
 let arr: [stirng]
 bigintTransform.unpack(arr) // 还原为字符串
 
-bigintTransform.plus(arr) // 计算两个当前的bigint类型数据相加
+let arrA: [stirng]
+let arrb: [stirng]
+bigintTransform.plus(arrA, arrB) // 计算两个当前的bigint类型数据相加
+// 可联合使用
+bigintTransform.plus(bigintTransform.pack(str), bigintTransform.pack(str))
 ```
 
 ### 提示
@@ -32,4 +39,7 @@ bigintTransform.plus(arr) // 计算两个当前的bigint类型数据相加
 ```
 v 1.0.3 版本之前只更新说明文档
 v 1.0.4 更新plus函数，计算两个当前的bigint类型数据相加
+v 1.0.4 - 1.0.6 更新说明文档
 ```
+> GitHub地址: https://github.com/BB-zhan/bigint-Transfrom
+> npm地址: https://www.npmjs.com/package/bigint-transform
