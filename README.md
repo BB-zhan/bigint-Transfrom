@@ -41,3 +41,5 @@ v 1.0.3 版本之前只更新说明文档
 v 1.0.4 更新plus函数，计算两个当前的bigint类型数据相加
 v 1.0.4 - 1.0.6 更新说明文档
 ```
+> GitHub地址: https://github.com/BB-zhan/bigint-Transfrom
+> npm地址: https://www.npmjs.com/package/bigint-transform
