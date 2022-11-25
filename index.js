@@ -1,26 +1,60 @@
-const bigintTransform = {
-    /* -------------------------处理函数------------------------------- */
+/* -------------------------处理函数------------------------------- */
+class Tool {
     // 补零操作
-    addZero: (a, b) => {
-        let sum = +a + +b + '',
-            len = 15 - sum.length
+    addZero(sum) {
+        sum += ''
+        let len = 15 - sum.length
         if (len <= 0) return sum
+        console.log(sum.length)
         for (let i = 0; i < len - 1; i++) {
             sum = '0' + sum
         }
         return sum
-    },
+    }
+    // 负数补零操作
+    addZeroD(sum) {
+        if (/[-]/g.test(sum)) {
+            let len = 16 - sum.length,
+                zero = ''
+            if (len <= 0) return sum
+            for (let i = 0; i < len - 1; i++) {
+                zero += '0'
+            }
+            return sum.substr(0, 1) + zero + sum.substr(1, -1)
+        } else {
+            return this.addZero(sum)
+        }
+    }
     // 计算结果
-    plusArrFun: function(a, b) {
+    plusArrFun(a, b) {
         return a.map((item, i) => {
-            if (b[i]) {
-                return i === a.length - 1 ? +item + +b[i] + '' : this.addZero(item, b[i])
+            if (!b[i]) return item
+            return i === a.length - 1 ? +item + +b[i] + '' : this.addZero(`${+item + +b[i]}`)
+        })
+    }
+    // 加法结果
+    minusArrFun(a, b) {
+        return a.map((item, i) => {
+            if (!b[i]) return item
+            if (i === a.length - 1) return `${+item - +b[i]}`
+            // TODO 测试
+            if (+item - +b[i] < 0) {
+                let index = 0
+                while (+`${index}${item}` - +b[i] <= 0) {
+                    index++
+                }
+                if (a[i + 1]) {
+                    a[i + 1] = i + 1 === a.length - 1 ? `${+a[i + 1] - index}` : this.addZero(`${+a[i + 1] - index}`)
+                }
+                return this.addZeroD(`${+(index + item) - +b[i]}`)
             } else {
-                return item
+                return this.addZeroD(`${+item - +b[i]}`)
             }
         })
-    },
-    /* --------------------------------------------------------------- */
+    }
+}
+/* --------------------------------------------------------------- */
+const bigintTransform = {
     // 转化
     pack: function (str) {
         if (!str || typeof str !== 'string') {
@@ -80,20 +114,32 @@ const bigintTransform = {
         if (arrA === 'Error' || arrB === 'Error') return
         arrA = arrA.reverse()
         arrB = arrB.reverse()
+        let tool = new Tool()
         // 开始求和
-        let sumArr = arrA.length >= arrB.length ? this.plusArrFun(arrA, arrB) : this.plusArrFun(arrB, arrA)
+        let sumArr = arrA.length >= arrB.length ? tool.plusArrFun(arrA, arrB) : tool.plusArrFun(arrB, arrA)
         sumArr = sumArr.reverse()
         // 数据进位操作
         sumArr.forEach((item, i) => {
             if (i === 0) return
             if (sumArr[i - 1] && item.length > 15) {
                 sumArr[i] = item.substr(1, item.length - 1)
-                sumArr[i - 1] = this.addZero(sumArr[i - 1], item.substr(0, 1))
+                sumArr[i - 1] = tool.addZero(`${+sumArr[i - 1] + +item.substr(0, 1)}`)
             }
         })
         console.log(`计算结果是${sumArr.join('')}`)
         // 结果
         return sumArr.join('')
+    },
+    // 减
+    minus: function (arrA, arrB) {
+        if (arrA === 'Error' || arrB === 'Error') return
+        arrA = arrA.reverse()
+        arrB = arrB.reverse()
+        let tool = new Tool()
+        let sumArr = arrA.length && arrB.length && arrA.length >= arrB.length ? tool.minusArrFun(arrA, arrB) : [...tool.minusArrFun(arrB, arrA), '-']
+        sumArr = sumArr.reverse().join('')
+        console.log(`计算结果是${sumArr}`)
+        return sumArr
     }
 }
 

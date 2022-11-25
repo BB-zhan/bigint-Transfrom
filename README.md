@@ -23,8 +23,12 @@ bigintTransform.unpack(arr) // 还原为字符串
 let arrA: [stirng]
 let arrb: [stirng]
 bigintTransform.plus(arrA, arrB) // 计算两个当前的bigint类型数据相加
+
+bigintTransform.minus(arrA, arrB) // 计算两个当前的bigint类型数据相减
 // 可联合使用
 bigintTransform.plus(bigintTransform.pack(str), bigintTransform.pack(str))
+
+bigintTransform.minus(bigintTransform.pack(str), bigintTransform.pack(str))
 ```
 
 ### 提示
@@ -38,10 +42,13 @@ bigintTransform.plus(bigintTransform.pack(str), bigintTransform.pack(str))
 ### 更新
 ```
 v 1.0.3 版本之前只更新说明文档
-v 1.0.4 更新plus函数，计算两个当前的bigint类型数据相加
+v 1.0.4 新增plus函数，计算两个当前的bigint类型数据相加
 v 1.0.4 - 1.0.6 更新说明文档
 v 1.0.7 紧急修复plus功能
+v 1.0.8 新增plus功能，计算两个当前的bigint类型数据相减
 ```
+
+#### 有问题及时上GitHub提issue:
 > GitHub地址: https://github.com/BB-zhan/bigint-Transfrom
 
 > npm地址: https://www.npmjs.com/package/bigint-transform
