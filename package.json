@@ -1,6 +1,6 @@
 {
     "name": "bigint-transform",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "main": "index.js",
     "description": "将长整型类型数据在前端以字符串类型展示，以每项不超过15位的字符串数组形式进行加减运算",
     "keywords": [
